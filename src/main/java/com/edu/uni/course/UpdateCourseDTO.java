@@ -7,12 +7,12 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-
-public class UpdateCourseDTO {
-    private String name;
-    private Integer creditHour;
-    private Integer doctorId;
-}
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
+//
+//public class UpdateCourseDTO {
+//    private String name;
+//    private Integer creditHour;
+//    private Integer doctorId;
+//}

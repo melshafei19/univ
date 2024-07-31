@@ -16,7 +16,7 @@ public class StudentController {
         return studentService.getAll();
     }
 
-    @GetMapping("id")
+    @GetMapping("{id}")
     public Student getById(@PathVariable int id) {
         return studentService.getById(id);
     }
@@ -26,7 +26,7 @@ public Student add(@RequestBody AddStudentDTO student) {
         return studentService.save(student);
     }
 
-    @PutMapping("id")
+    @PutMapping("{id}")
     public Student update(@RequestBody UpdateStudentDTO student, @PathVariable int id) {
         return studentService.update(student,id);
     }

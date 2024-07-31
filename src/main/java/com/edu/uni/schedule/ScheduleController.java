@@ -17,7 +17,7 @@ public class ScheduleController {
         return scheduleService.getAllSchedules();
     }
 
-    @GetMapping("id")
+    @GetMapping("{id}")
     public Schedule getScheduleById(@PathVariable int id) {
         return scheduleService.getScheduleById(id);
     }
@@ -25,7 +25,7 @@ public class ScheduleController {
     public Schedule add(@RequestBody AddScheduleDTO schedule) {
         return scheduleService.save(schedule);
     }
-    @PutMapping("id")
+    @PutMapping("{id}")
     public Schedule update(@RequestBody UpdateScheduleDTO schedule, @PathVariable int id) {
         return scheduleService.update(schedule, id);
     }

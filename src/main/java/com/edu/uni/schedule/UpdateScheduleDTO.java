@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 public class UpdateScheduleDTO {
     private Integer courseId;
-    private Integer classroom_id;
+    private Integer classroomId;
     private Timestamp startTime;
     private Timestamp endTime;
     private Integer majorId;

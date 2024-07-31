@@ -13,25 +13,26 @@ public class CourseController {
     private CourseService courseService;
 
     @GetMapping("")
-    public List<Course> getAllCourses() {
+    public List<CourseDetailsDTO> getAllCourses() {
         return courseService.getAllCourses();
     }
 
-    @GetMapping("id")
-    public Course getCourseById(@PathVariable int id) {
-        return courseService.getCourseById(id);
+    @GetMapping("{id}")
+    public CourseDetailsDTO getcourseDetailsDTO(@PathVariable int id) {
+        return courseService.getcourseDetailsDTO(id);
     }
 
     @PostMapping("")
-    public Course add(@RequestBody AddCourseDTO course) {
-        return courseService.add(course);
+    public Course save(@RequestBody Course course) {
+        return courseService.save(course);
     }
 
-    @PutMapping("id")
-    public Course update(@RequestBody UpdateCourseDTO course,@PathVariable int id) {
-        return courseService.update(course,id);
+    @PutMapping("{id}")
+    public Course update(@RequestBody Course course, @PathVariable int id) {
+        course.setId(id);
+        return courseService.save(course);
     }
-    @DeleteMapping("id")
+    @DeleteMapping("{id}")
     public void delete(@PathVariable int id) {
         courseService.delete(id);
     }

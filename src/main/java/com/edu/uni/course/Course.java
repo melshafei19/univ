@@ -1,5 +1,6 @@
 package com.edu.uni.course;
 
+import com.edu.uni.doctor.Doctor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 
 public class Course {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -24,9 +26,12 @@ public class Course {
     @Column(name = "credit_hour")
     private Integer creditHour;
 
-    @Column(name = "doctor_id", nullable = false)
+    @Column(name = "doctor_id", insertable = false, updatable = false, nullable = true)
     private Integer doctorId;
 
+//    @ManyToOne
+//    @JoinColumn(name = "doctor_id")
+//    private Doctor doctor;
     @Lob
     @Column(name = "created_at")
     private Timestamp createdAt;
@@ -34,4 +39,10 @@ public class Course {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
+    public Course(String name, Integer creditHour, Integer doctorId) {
+        this.name = name;
+        this.creditHour = creditHour;
+        this.doctorId = doctorId;
+    }
 }
+

@@ -15,7 +15,7 @@ public class MajorService {
     public List<Major> getAll() {
         return majorRepository.findAll();
     }
-    public Major getById(int id) {
+    public Major getMajorDetailsDTO(int id) {
         Optional<Major> major = majorRepository.findById(id);
         return major.orElse(null);
     }
@@ -28,7 +28,7 @@ public class MajorService {
     }
 
     public Major update(UpdateMajorDTO updateMajorDTO,Integer id) {
-        Major major = getById(id);
+        Major major = getMajorDetailsDTO(id);
         major.setName(updateMajorDTO.getName());
         major.setCourseId(updateMajorDTO.getCourseId());
         major.setDoctorId(updateMajorDTO.getDoctorId());

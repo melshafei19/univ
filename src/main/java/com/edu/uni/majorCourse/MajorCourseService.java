@@ -1,7 +1,9 @@
 package com.edu.uni.majorCourse;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -11,13 +13,13 @@ public class MajorCourseService {
     @Autowired
     MajorCourseRepository majorCourseRepository;
 
-    public List<MajorCourse> getAll() {
-        return majorCourseRepository.findAll();
+    public List<MajorCourseDetailsDTO> getAll() {
+        return majorCourseRepository.findAllMajorCourseDetails();
     }
 
-    public MajorCourse getById(int id) {
-        Optional<MajorCourse> majorCourse = majorCourseRepository.findById(id);
-        return majorCourse.orElse(null);
+    public MajorCourseDetailsDTO getById(int id) {
+        MajorCourseDetailsDTO majorCourse = majorCourseRepository.findMajorCourseDetailsById(id);
+        return majorCourseRepository.findMajorCourseDetailsById(id);
     }
 
     public MajorCourse save(AddMajorCourseDTO addMajorCourseDTO) {
@@ -30,12 +32,19 @@ public class MajorCourseService {
 
     public MajorCourse update(UpdateMajorCourseDTO updateMajorCourseDTO, Integer id) {
         MajorCourse majorCourse = getById(id);
-        majorCourse.setMajorId(updateMajorCourseDTO.getMajorId());
-        majorCourse.setCourseId(updateMajorCourseDTO.getCourseId());
-        return majorCourseRepository.save(majorCourse);
+        if (majorCourse != null) {
+            majorCourse.setMajorId(updateMajorCourseDTO.getMajorId());
+            majorCourse.setCourseId(updateMajorCourseDTO.getCourseId());
+            return majorCourseRepository.save(majorCourse);
+        }
+        throw new EntityNotFoundException("MajorCourse not found with id " + id);
     }
 
-    public void delete(int id) {
-        majorCourseRepository.deleteById(id);
+    private MajorCourse getById(Integer id) {
+        return majorCourseRepository.findById(id).orElse(null);
     }
 }
+//    public void delete(int id) {
+//        majorCourseRepository.deleteById(id);
+//    }
+

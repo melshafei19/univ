@@ -6,10 +6,12 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class AddProjectDTO {
-    private String name;
-    private Integer courseId;
-}
+//@Data
+//@AllArgsConstructor
+//@NoArgsConstructor
+//public class AddProjectDTO {
+//    private String name;
+//    private Integer courseId;
+//    private String course;
+
+//}

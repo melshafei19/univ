@@ -19,7 +19,7 @@ public class ClassroomController {
         return classroomService.getAllClassrooms();
     }
 
-    @GetMapping ("id")
+    @GetMapping ("{id}")
     public Classroom getClassroomById(@PathVariable int id) {
         return classroomService.getClassroomById(id);
 
@@ -29,7 +29,7 @@ public class ClassroomController {
 
         return classroomService.save(classroom);
     }
-    @PutMapping("id")
+    @PutMapping("{id}")
     public Classroom update(@RequestBody UpdateClassroomDTO classroom,@PathVariable int id) {
         return classroomService.update(classroom,id);
 

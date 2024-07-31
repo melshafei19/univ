@@ -12,5 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class UpdateMajorCourseDTO {
     private Integer majorId;
+    private String majorName;
     private Integer courseId;
+    private String courseName;
 }

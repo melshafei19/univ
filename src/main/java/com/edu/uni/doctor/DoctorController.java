@@ -15,23 +15,24 @@ public class DoctorController {
         return doctorService.getAll();
     }
 
-    @GetMapping("id")
+    @GetMapping("{id}")
     public Doctor getById(@PathVariable int id) {
         return doctorService.getById(id);
     }
 
     @PostMapping("")
-    public Doctor add(@RequestBody AddDoctorDTO doctor) {
+    public Doctor save(@RequestBody Doctor doctor) {
         return doctorService.save(doctor);
     }
 
-    @PutMapping("id")
-    public Doctor update(@RequestBody UpdateDoctorDTO doctor, @PathVariable int id) {
-        return doctorService.update(doctor,id);
+    @PutMapping("{id}")
+    public Doctor update(@RequestBody Doctor doctor, @PathVariable int id) {
+        doctor.setId(id);
+        return doctorService.save(doctor);
     }
 
-@DeleteMapping("id")
-public void delete(@PathVariable ("id") int id) {
-   doctorService.delete(id);
-}
-}
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable int id) {
+       doctorService.delete(id);
+    }
+    }

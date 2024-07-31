@@ -9,6 +9,7 @@ import java.util.Optional;
 public class ScheduleService {
     @Autowired
     private ScheduleRepository scheduleRepository;
+
     public List<Schedule> getAllSchedules() {
         return scheduleRepository.findAll();
     }
@@ -20,7 +21,7 @@ public class ScheduleService {
     public Schedule save(AddScheduleDTO addScheduleDTO){
         Schedule schedule = new Schedule();
         schedule.setCourseId(addScheduleDTO.getCourseId());
-        schedule.setClassroomId(addScheduleDTO.getClassroom_id());
+        schedule.setClassroomId(addScheduleDTO.getClassroomId());
         schedule.setDayOfWeek(addScheduleDTO.getDayOfWeek());
         schedule.setMajorId(addScheduleDTO.getMajorId());
         schedule.setStartTime(addScheduleDTO.getStartTime());
@@ -31,7 +32,7 @@ public class ScheduleService {
     public Schedule update(UpdateScheduleDTO updateScheduleDTO,Integer id) {
         Schedule schedule = getScheduleById(id);
         schedule.setCourseId(updateScheduleDTO.getCourseId());
-        schedule.setClassroomId(updateScheduleDTO.getClassroom_id());
+        schedule.setClassroomId(updateScheduleDTO.getClassroomId());
         schedule.setDayOfWeek(updateScheduleDTO.getDayOfWeek());
         schedule.setMajorId(updateScheduleDTO.getMajorId());
         schedule.setStartTime(updateScheduleDTO.getStartTime());

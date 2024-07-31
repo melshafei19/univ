@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Entity
 public class Doctor {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -30,4 +31,10 @@ public class Doctor {
 
     @Column(name = "updated_at")
     private Timestamp updatedAt;
+
+    public Doctor(String office, String email, String name) {
+        this.office = office;
+        this.email = email;
+        this.name = name;
+    }
 }

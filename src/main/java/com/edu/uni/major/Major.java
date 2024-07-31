@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 
 public class Major {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 

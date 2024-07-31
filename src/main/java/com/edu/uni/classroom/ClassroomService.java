@@ -12,6 +12,7 @@ public class ClassroomService {
     public List<Classroom> getAllClassrooms() {
         return classroomRepository.findAll();
     }
+
     public Classroom getClassroomById(int id) {
         Optional<Classroom> classroom= classroomRepository.findById(id);
         return classroom.orElse(null);

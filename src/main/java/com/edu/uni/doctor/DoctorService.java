@@ -20,21 +20,25 @@ public class DoctorService {
         return doctor.orElse(null);
     }
 
-    public Doctor save(AddDoctorDTO addDoctorDTO) {
-        Doctor doctor = new Doctor();
-        doctor.setName(addDoctorDTO.getName());
-        doctor.setEmail(addDoctorDTO.getEmail());
-        doctor.setOffice(addDoctorDTO.getOffice());
+    public Doctor save(Doctor doctor) {
         return doctorRepository.save(doctor);
     }
 
-    public Doctor update(UpdateDoctorDTO updateDoctorDTO, Integer id) {
-        Doctor doctor = getById(id);
-        doctor.setName(updateDoctorDTO.getName());
-        doctor.setEmail(updateDoctorDTO.getEmail());
-        doctor.setOffice(updateDoctorDTO.getOffice());
-        return doctorRepository.save(doctor);
-    }
+//    public Doctor save(AddDoctorDTO addDoctorDTO) {
+//        Doctor doctor = new Doctor();
+//        doctor.setName(addDoctorDTO.getName());
+//        doctor.setEmail(addDoctorDTO.getEmail());
+//        doctor.setOffice(addDoctorDTO.getOffice());
+//        return doctorRepository.save(doctor);
+//    }
+
+//    public Doctor update(Doctor doctor, Integer id) {
+//        Doctor doctor = getById(id);
+//        doctor.setName(doctor.getName());
+//        doctor.setEmail(doctor.getEmail());
+//        doctor.setOffice(doctor.getOffice());
+//        return doctorRepository.save(doctor);
+//    }
 
     public void delete(int id) {
         doctorRepository.deleteById(id);

@@ -16,9 +16,9 @@ public class MajorController {
         return majorService.getAll();
     }
 
-    @GetMapping ("id")
+    @GetMapping ("{id}")
     public Major getById(@PathVariable int id) {
-        return majorService.getById(id);
+        return majorService.getMajorDetailsDTO(id);
 
     }
     @PostMapping("")
@@ -26,7 +26,7 @@ public class MajorController {
         return majorService.save(major);
     }
 
-    @PutMapping("id")
+    @PutMapping("{id}")
     public Major update(@RequestBody UpdateMajorDTO major, @PathVariable int id) {
         return majorService.update(major, id);
     }

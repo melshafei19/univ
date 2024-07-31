@@ -9,27 +9,40 @@ import java.util.Optional;
 public class CourseService {
     @Autowired
     private CourseRepository courseRepository;
-    public List<Course> getAllCourses() {
-        return courseRepository.findAll();
+
+    public List<CourseDetailsDTO> getAllCourses() {
+        return courseRepository.getCourseDetails();
     }
+
     public Course getCourseById(int id) {
         Optional<Course> course = courseRepository.findById(id);
         return course.orElse(null);
     }
-    public Course add(AddCourseDTO addCourseDTO) {
-        Course course = new Course();
-        course.setName(addCourseDTO.getName());
-        course.setCreditHour(addCourseDTO.getCreditHour());
-        course.setDoctorId(addCourseDTO.getDoctorId());
+
+    public CourseDetailsDTO getcourseDetailsDTO(int id) {
+        Optional<CourseDetailsDTO> courseDetailsDTO = courseRepository.getCourseDetailsDTO(id);
+        return courseDetailsDTO.orElse(null);
+    }
+
+    public Course save(Course course) {
         return courseRepository.save(course);
     }
-    public Course update(UpdateCourseDTO updateCourseDTO,Integer id) {
-        Course course = getCourseById(id);
-        course.setName(updateCourseDTO.getName());
-        course.setCreditHour(updateCourseDTO.getCreditHour());
-        course.setDoctorId(updateCourseDTO.getDoctorId());
-        return courseRepository.save(course);
-    }
+
+//    public Course add(AddCourseDTO addCourseDTO) {
+//        Course course = new Course();
+//        course.setName(addCourseDTO.getName());
+//        course.setCreditHour(addCourseDTO.getCreditHour());
+//        course.setDoctorId(addCourseDTO.getDoctorId());
+//        return courseRepository.save(course);
+//    }
+//    public Course update(UpdateCourseDTO updateCourseDTO,Integer id) {
+//        Course course = getCourseById(id);
+//        course.setName(updateCourseDTO.getName());
+//        course.setCreditHour(updateCourseDTO.getCreditHour());
+//        course.setDoctorId(updateCourseDTO.getDoctorId());
+//
+//        return courseRepository.save(course);
+//    }
     public void delete(int id) {
         courseRepository.deleteById(id);
     }

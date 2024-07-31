@@ -13,12 +13,12 @@ public class MajorCourseController {
     MajorCourseService majorCourseService;
 
     @GetMapping("")
-    public List<MajorCourse> getAllMajorCourse(){
+    public List<MajorCourseDetailsDTO> getAllMajorCourseDetails() {
         return majorCourseService.getAll();
     }
 
-    @GetMapping("id")
-    public MajorCourse getById(@PathVariable int id) {
+    @GetMapping("/{id}")
+    public MajorCourseDetailsDTO getMajorCourseById(@PathVariable int id) {
         return majorCourseService.getById(id);
     }
 
@@ -27,13 +27,14 @@ public class MajorCourseController {
         return majorCourseService.save(majorCourse);
     }
 
-    @PutMapping("id")
-    public MajorCourse update(@RequestBody UpdateMajorCourseDTO majorCourse, @PathVariable int id) {
-        return majorCourseService.update(majorCourse,id);
-    }
 
-    @DeleteMapping("id")
-    public void delete(@PathVariable ("id") int id) {
-        majorCourseService.delete(id);
+    @PutMapping("/{id}")
+    public MajorCourse update(@RequestBody UpdateMajorCourseDTO updateMajorCourseDTO, @PathVariable int id) {
+        return majorCourseService.update(updateMajorCourseDTO, id);
     }
+//
+//    @DeleteMapping("id")
+//    public void delete(@PathVariable ("id") int id) {
+//        majorCourseService.delete(id);
+//    }
 }

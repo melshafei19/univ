@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 
 public class AddScheduleDTO {
     private Integer courseId;
-    private Integer classroom_id;
+    private Integer classroomId;
     private Timestamp startTime;
     private Timestamp endTime;
     private Integer majorId;

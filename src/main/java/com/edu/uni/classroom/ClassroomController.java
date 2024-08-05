@@ -32,8 +32,8 @@ public class ClassroomController {
     @PutMapping("{id}")
     public Classroom update(@RequestBody UpdateClassroomDTO classroom,@PathVariable int id) {
         return classroomService.update(classroom,id);
-
     }
+
     @DeleteMapping("id")
     public void delete(@PathVariable("id") int id) {
 

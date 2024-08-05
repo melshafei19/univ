@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

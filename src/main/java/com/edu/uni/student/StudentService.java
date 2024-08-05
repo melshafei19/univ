@@ -11,16 +11,15 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
-    public List<Student> getAll() {
-        return studentRepository.findAll();
+    public List<StudentDetailsDTO> findAll() {
+        return studentRepository.findAllStudentDetails();
     }
 
-    public Student getById(int id) {
-        Optional<Student> student = studentRepository.findById(id);
-        return student.orElse(null);
+    public Optional<StudentDetailsDTO> findById(int studentId) {
+        return Optional.ofNullable(studentRepository.findStudentDetailsById(studentId));
     }
 
-    public Student save(AddStudentDTO addStudentDTO) {
+    public Optional<StudentDetailsDTO> save(AddStudentDTO addStudentDTO) {
         Student student = new Student();
         student.setName(addStudentDTO.getName());
         student.setMajorId(addStudentDTO.getMajorId());
@@ -30,11 +29,18 @@ public class StudentService {
         student.setEmail(addStudentDTO.getEmail());
         student.setPhoneNumber(addStudentDTO.getPhoneNumber());
         student.setAddress(addStudentDTO.getAddress());
-        return studentRepository.save(student);
+        Student savedStudent = studentRepository.save(student);
+
+        return Optional.ofNullable(studentRepository.findStudentDetailsById(savedStudent.getId()));
     }
 
-    public Student update(UpdateStudentDTO updateStudentDTO, Integer id) {
-        Student student = getById(id);
+    public Optional<StudentDetailsDTO> update(UpdateStudentDTO updateStudentDTO, int studentId) {
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
+        if (!studentOptional.isPresent()) {
+            return Optional.empty();
+        }
+
+        Student student = studentOptional.get();
         student.setName(updateStudentDTO.getName());
         student.setMajorId(updateStudentDTO.getMajorId());
         student.setCourseId(updateStudentDTO.getCourseId());
@@ -43,9 +49,17 @@ public class StudentService {
         student.setEmail(updateStudentDTO.getEmail());
         student.setPhoneNumber(updateStudentDTO.getPhoneNumber());
         student.setAddress(updateStudentDTO.getAddress());
-        return studentRepository.save(student);
+        studentRepository.save(student);
+
+        return Optional.ofNullable(studentRepository.findStudentDetailsById(studentId));
     }
-    public void delete(int id) {
-        studentRepository.deleteById(id);
+
+    public void delete(int studentId) {
+        if (studentRepository.existsById(studentId)) {
+            studentRepository.deleteById(studentId);
+        }
     }
 }
+
+
+

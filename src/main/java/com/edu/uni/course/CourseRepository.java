@@ -13,16 +13,16 @@ import java.util.Optional;
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Integer> {
 
-        @Query("select new com.edu.uni.course.CourseDetailsDTO(c.name, c.creditHour, d.name) " +
+        @Query("select new com.edu.uni.course.CourseDTO(c.name, c.creditHour, d.name) " +
                 "from Course c" +
                 " inner join Doctor d on d.id = c.doctorId")
-        List <CourseDetailsDTO> getCourseDetails();
+        List <CourseDTO> getAll();
 
-        @Query("select new com.edu.uni.course.CourseDetailsDTO(c.name, c.creditHour, d.name) " +
+        @Query("select new com.edu.uni.course.CourseDTO(c.name, c.creditHour, d.name) " +
                 "from Course c" +
                 " inner join Doctor d on d.id = c.doctorId" +
                 " where d.id = :doctorId ")
-        Optional<CourseDetailsDTO> getCourseDetailsDTO(int doctorId);
+        CourseDTO getCourseDTOById(int doctorId);
 
 
     }

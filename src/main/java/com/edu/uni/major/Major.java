@@ -21,10 +21,10 @@ public class Major {
     @Column(name = "name", length = 100)
     private String name;
 
-    @Column(name = "course_id", nullable = false)
+    @Column(name = "course_id")
     private Integer courseId;
 
-    @Column(name = "doctor_id", nullable = false)
+    @Column(name = "doctor_id")
     private Integer doctorId;
 
     @Lob
@@ -34,5 +34,9 @@ public class Major {
     @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-
+    public Major(String name, Integer courseId, Integer doctorId) {
+        this.name = name;
+        this.courseId = courseId;
+        this.doctorId = doctorId;
+    }
 }

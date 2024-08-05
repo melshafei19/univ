@@ -10,10 +10,17 @@ import java.util.List;
 @Repository
 public interface MajorRepository extends JpaRepository<Major, Integer> {
 
-    @Query(value = "SELECT m.id as majorId, m.name as majorName, c.id as courseId, c.name as courseName, d.id as doctorId, d.name as doctorName " +
+    @Query("SELECT new com.edu.uni.major.MajorDTO (m.id, m.name, c.name, d.name) " +
             "FROM Major m " +
-            "JOIN Course c ON m.id = c.major_id " +
-            "JOIN Doctor d ON c.doctor_id = d.id " +
-            "WHERE m.id = :majorId", nativeQuery = true)
-    List<Major> getMajorDetailsDTO(@PathVariable("majorId") Integer majorId);
+            " INNER JOIN Course c ON c.id = m.courseId " +
+            "INNER JOIN Doctor d ON d.id = c.doctorId ")
+    List<MajorDTO> getAll();
+
+
+    @Query("SELECT new com.edu.uni.major.MajorDTO (m.id, m.name, c.name, d.name) " +
+            "FROM Major m " +
+            " INNER JOIN Course c ON c.id = m.courseId " +
+            "INNER JOIN Doctor d ON d.id = c.doctorId " +
+            "WHERE m.id = :majorId")
+    MajorDTO getMajorDTOById(int majorId);
 }

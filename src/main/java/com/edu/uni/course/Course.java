@@ -26,7 +26,7 @@ public class Course {
     @Column(name = "credit_hour")
     private Integer creditHour;
 
-    @Column(name = "doctor_id", insertable = false, updatable = false, nullable = true)
+    @Column(name = "doctor_id")
     private Integer doctorId;
 
 //    @ManyToOne

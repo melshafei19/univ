@@ -12,26 +12,27 @@ public class MajorController {
     private MajorService majorService;
 
     @GetMapping("")
-    public List<Major> getAllMajors() {
-        return majorService.getAll();
+    public List<MajorDTO> getAllMajors() {
+        return majorService.findAll();
     }
 
     @GetMapping ("{id}")
-    public Major getById(@PathVariable int id) {
-        return majorService.getMajorDetailsDTO(id);
+    public MajorDTO getProjectDTO(@PathVariable int id) {
+        return majorService.getMajorById(id);
 
     }
     @PostMapping("")
-    public Major add(@RequestBody AddMajorDTO major) {
+    public List<MajorDTO> save(@RequestBody Major major) {
         return majorService.save(major);
     }
 
     @PutMapping("{id}")
-    public Major update(@RequestBody UpdateMajorDTO major, @PathVariable int id) {
+    public MajorDTO update(@RequestBody Major major, @PathVariable int id) {
+        major.setId(id);
         return majorService.update(major, id);
     }
 
-    @DeleteMapping("id")
+    @DeleteMapping("{id}")
     public void delete(@PathVariable int id) {
         majorService.delete(id);
     }

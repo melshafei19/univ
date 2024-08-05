@@ -1,4 +1,4 @@
-package com.edu.uni.project;
+package com.edu.uni.course;
 
 
 import lombok.AllArgsConstructor;
@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProjectDTO {
-    private int id;
+
+public class CourseDTO {
+
     private String name;
-    private String courseName;
     private int creditHour;
     private String doctorName;
 

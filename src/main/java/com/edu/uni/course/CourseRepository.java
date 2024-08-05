@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
-
+//
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Integer> {
 
-        @Query("select new com.edu.uni.course.CourseDetailsDTO(c.name, c.creditHour, d.name) " +
-                "from Course c" +
-                " inner join Doctor d on d.id = c.doctorId")
-        List <CourseDetailsDTO> getCourseDetails();
-
-        @Query("select new com.edu.uni.course.CourseDetailsDTO(c.name, c.creditHour, d.name) " +
-                "from Course c" +
-                " inner join Doctor d on d.id = c.doctorId" +
-                " where d.id = :doctorId ")
-        Optional<CourseDetailsDTO> getCourseDetailsDTO(int doctorId);
-
-
+//        @Query("select new com.edu.uni.course.CourseDetailsDTO(c.name, c.creditHour, d.name) " +
+//                "from Course c" +
+//                " inner join Doctor d on d.id = c.doctorId")
+//        List <CourseDetailsDTO> getCourseDetails();
+//
+//        @Query("select new com.edu.uni.course.CourseDetailsDTO(c.name, c.creditHour, d.name) " +
+//                "from Course c" +
+//                " inner join Doctor d on d.id = c.doctorId" +
+//                " where d.id = :doctorId ")
+//        Optional<CourseDetailsDTO> getCourseDetailsDTO(int doctorId);
+//
+//
     }
 
 

@@ -1,7 +1,5 @@
 package com.edu.uni.majorCourse;
 
-import com.edu.uni.course.Course;
-import com.edu.uni.major.Major;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,14 +17,6 @@ public class MajorCourse {
     @Column(name = "id")
     private Integer id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "major_id")
-//    private Major major;
-
-//    @ManyToOne
-//    @JoinColumn(name = "course_id")
-//    private Course course;
-
     @Column(name = "major_id", nullable = false)
     private Integer majorId;
 
@@ -38,6 +28,4 @@ public class MajorCourse {
 
     @Column(name = "updated_at")
     private Timestamp updatedAt;
-
-
 }

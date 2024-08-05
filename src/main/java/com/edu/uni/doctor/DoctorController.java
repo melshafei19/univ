@@ -21,18 +21,17 @@ public class DoctorController {
     }
 
     @PostMapping("")
-    public Doctor save(@RequestBody Doctor doctor) {
+    public Doctor add(@RequestBody AddDoctorDTO doctor) {
         return doctorService.save(doctor);
     }
 
     @PutMapping("{id}")
-    public Doctor update(@RequestBody Doctor doctor, @PathVariable int id) {
-        doctor.setId(id);
-        return doctorService.save(doctor);
+    public Doctor update(@RequestBody UpdateDoctorDTO doctor, @PathVariable int id) {
+        return doctorService.update(doctor,id);
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id) {
-       doctorService.delete(id);
-    }
-    }
+@DeleteMapping("id")
+public void delete(@PathVariable ("id") int id) {
+   doctorService.delete(id);
+}
+}

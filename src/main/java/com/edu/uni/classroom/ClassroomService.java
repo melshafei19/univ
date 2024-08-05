@@ -22,7 +22,6 @@ public class ClassroomService {
         classroom.setBuildingName(addClassroomDTO.getBuildingName());
         classroom.setRoomNumber(addClassroomDTO.getRoomNumber());
         return classroomRepository.save(classroom);
-
     }
 
     public Classroom update(UpdateClassroomDTO updateClassroomDTO,Integer id) {

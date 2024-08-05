@@ -1,6 +1,9 @@
 package com.edu.uni.student;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -12,27 +15,36 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("")
-    public List<Student> getAllStudents(){
-        return studentService.getAll();
+    public List<StudentDetailsDTO> findAll() {
+        return studentService.findAll();
     }
 
     @GetMapping("{id}")
-    public Student getById(@PathVariable int id) {
-        return studentService.getById(id);
+    public ResponseEntity<StudentDetailsDTO> findById(@PathVariable int id) {
+        Optional<StudentDetailsDTO> student = studentService.findById(id);
+        if (student.isPresent()) {
+            return ResponseEntity.ok(student.get());
+         } else {
+            return ResponseEntity.notFound().build();
+         }
     }
 
-    @PostMapping("")
-public Student add(@RequestBody AddStudentDTO student) {
-        return studentService.save(student);
+    @PostMapping
+    public ResponseEntity<StudentDetailsDTO> add(@RequestBody AddStudentDTO addStudentDTO) {
+        Optional<StudentDetailsDTO> createdStudent = studentService.save(addStudentDTO);
+        return createdStudent.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(500).build());
     }
 
     @PutMapping("{id}")
-    public Student update(@RequestBody UpdateStudentDTO student, @PathVariable int id) {
-        return studentService.update(student,id);
+    public ResponseEntity<StudentDetailsDTO> update(@RequestBody UpdateStudentDTO updateStudentDTO, @PathVariable int id) {
+        Optional<StudentDetailsDTO> updatedStudent = studentService.update(updateStudentDTO, id);
+        return updatedStudent.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("id")
+    @DeleteMapping("{id}")
     public void delete(@PathVariable ("id") int id) {
         studentService.delete(id);
     }
-}
+    }

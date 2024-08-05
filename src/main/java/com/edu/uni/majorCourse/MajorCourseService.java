@@ -1,9 +1,7 @@
 package com.edu.uni.majorCourse;
 
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -13,38 +11,38 @@ public class MajorCourseService {
     @Autowired
     MajorCourseRepository majorCourseRepository;
 
-    public List<MajorCourseDetailsDTO> getAll() {
+    public List<MajorCourseDetailsDTO> findAll() {
         return majorCourseRepository.findAllMajorCourseDetails();
     }
 
-    public MajorCourseDetailsDTO getById(int id) {
-        MajorCourseDetailsDTO majorCourse = majorCourseRepository.findMajorCourseDetailsById(id);
-        return majorCourseRepository.findMajorCourseDetailsById(id);
+    public Optional<MajorCourseDetailsDTO> findById(int majorCourseId) {
+        return Optional.ofNullable(majorCourseRepository.findMajorCourseDetailsById(majorCourseId));
     }
 
-    public MajorCourse save(AddMajorCourseDTO addMajorCourseDTO) {
+    public Optional<MajorCourseDetailsDTO> save(AddMajorCourseDTO addMajorCourseDTO) {
         MajorCourse majorCourse = new MajorCourse();
         majorCourse.setMajorId(addMajorCourseDTO.getMajorId());
         majorCourse.setCourseId(addMajorCourseDTO.getCourseId());
-        return majorCourseRepository.save(majorCourse);
+        MajorCourse savedMajorCourse = majorCourseRepository.save(majorCourse);
+
+        return Optional.ofNullable(majorCourseRepository.findMajorCourseDetailsById(savedMajorCourse.getId()));
     }
 
-
-    public MajorCourse update(UpdateMajorCourseDTO updateMajorCourseDTO, Integer id) {
-        MajorCourse majorCourse = getById(id);
-        if (majorCourse != null) {
-            majorCourse.setMajorId(updateMajorCourseDTO.getMajorId());
-            majorCourse.setCourseId(updateMajorCourseDTO.getCourseId());
-            return majorCourseRepository.save(majorCourse);
+    public Optional<MajorCourseDetailsDTO> update(UpdateMajorCourseDTO updateMajorCourseDTO, int majorcourseId) {
+        Optional<MajorCourse> majorCourseOptional = majorCourseRepository.findById(majorcourseId);
+        if (!majorCourseOptional.isPresent()) {
+            return Optional.empty();
         }
-        throw new EntityNotFoundException("MajorCourse not found with id " + id);
-    }
 
-    private MajorCourse getById(Integer id) {
-        return majorCourseRepository.findById(id).orElse(null);
-    }
-}
-//    public void delete(int id) {
-//        majorCourseRepository.deleteById(id);
-//    }
+        MajorCourse majorCourse = majorCourseOptional.get();
+        majorCourse.setMajorId(updateMajorCourseDTO.getMajorId());
+        majorCourse.setCourseId(updateMajorCourseDTO.getCourseId());
+        majorCourseRepository.save(majorCourse);
 
+        return Optional.ofNullable(majorCourseRepository.findMajorCourseDetailsById(majorcourseId));
+    }
+    public void delete(int majorCourseId) {
+        if (majorCourseRepository.existsById(majorCourseId)) {
+            majorCourseRepository.deleteById(majorCourseId);
+        }
+    }}
